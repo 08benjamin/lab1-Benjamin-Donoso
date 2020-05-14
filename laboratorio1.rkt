@@ -8,24 +8,42 @@
 ;entrada un string con el comando a ejecutar
 ;salida un booleano verificando la accion
 ;funcion identificadora de comandos git
-(define (git comando info)
-  (define comparador (string-append comando))
-  (if (string=? comparador "pull")
-      #t
-      (if (string=? comparador "add")
-          #t
-          (if (string=? comparador commit)
-              (commit info)
-              (if (string=? comparador "push")
+(define gitProceso (lambda(comando info) (lambda (zonasDeTrabajo)
+    (if(procedure? comando)
+       (if (compPull comando)
+           #t
+             (if (compAdd comando)
                   #t
-                  (display "no se pudo ejecutar el comando")
-              )
-          )
-      )
-  )
- #f
+                  (if (compCommit comando)
+                      (commit info)
+                          (if (compPush comando)
+                          #t
+                          #f
+                      )
+                  )
+             )
+       )
+    #f
+    )
+                                         )
+                  )
 )
+(define git(lambda(comando info)
+             ((gitProceso comando info)zonas)))
+;funcion la cual operara como main para poder guardar los cambios de informacion en la lista de estados
 
+(define mantener #t)
+;(define salir (define mantener #f))
+
+(define (main listaEstados)
+  (if (equal? mantener #t)
+      (main listaEstados)
+      (display "cerrando interfaz git")))
+
+  
+    
+      
+  
 
 
        
