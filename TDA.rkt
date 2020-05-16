@@ -14,13 +14,6 @@
 ;entrada nula
 ;salidas una lista de listas vacias 
 ;tda contructor
-;se generan las zonas de trabajo para poder almacenar commits, estados, etc.
-(define workplace (list ))
-(define index (list ))
-(define local_repository (list ))
-(define remote_repository (list ))
-;las zonas contendran todos los espacios de trabajo para su manipulacion
-(define zonas (list workplace index local_repository remote_repository))
 
 
 ;definicion de un selector para poder saber que estado se va a modificar
@@ -33,29 +26,77 @@
 ;  )
 ;)
 
-;entrada la informacion a cambiar
+
+;(define zonas (commit info))
+;(define zonas1(commit(info)))
+
+;se generan las zonas de trabajo para poder almacenar commits, estados, etc.
+(define workplace (list ))
+(define index (list ))
+(define local_repository (list ))
+(define remote_repository (list ))
+;las zonas contendran todos los espacios de trabajo para su manipulacion
+(define zonas (list workplace index local_repository remote_repository))
+
+;entrada la informacion a cambiar y zonas
 ;salida lista de las zonas de trabajo con el commit añadido
 ;funcion commit 
 (define commi(lambda(info)(lambda(zonas)
                               (define local_repository index)
+                              (define index (list ))
                               (define zonas (list workplace index local_repository remote_repository))
                              zonas)
              )
 )
+
+
+;encapzulamiento               
 (define commit(lambda(info)
                 ((commi info)zonas)))
+;(define local_repository commit) 
 
-(define (add info)
-  
-  (display "add"))
+;entrada la informacion a cambiar y zonas
+;salida lista de las zonas de trabajo con el add añadido
+;funcion add
+(define ad(lambda(info)(lambda(zonas)
+                         (define index workplace)
+                         (define workplace (list ))
+                         (define zonas (list workplace index local_repository remote_repository))
+                         zonas)
+             )
+)
+;encapzulamiento   
+(define add(lambda(info)
+                ((add info)zonas)))
 
-(define (pull info)
-  
-  (display "pull"))
+;entrada la informacion a cambiar y zonas
+;salida lista de las zonas de trabajo con el pull añadido
+;funcion pull
+(define pul(lambda(info)(lambda(zonas)
+                         (define remote_repository local_repository)
+                         (define local_repository (list ))
+                         (define zonas (list workplace index local_repository remote_repository))
+                         zonas)
+             )
+)
 
-(define (push info)
+;encapzulamiento 
+(define pull(lambda(info)
+                ((add info)zonas)))
 
-  (display "push"))
+;entrada la informacion a cambiar y zonas
+;salida lista de las zonas de trabajo con el pull añadido
+;funcion pull
+(define pus(lambda(info)(lambda(zonas)
+                         (define workplace remote_repository)
+                         (define zonas (list workplace index local_repository remote_repository))
+                         zonas)
+             )
+)
+
+
+(define pull(lambda(info)
+                ((add info)zonas)))
 
 ;funcion la cual se encarga de mantener los cambios de las zonas de trabajo
 ;(define cambio(funcion zonas cambio)
