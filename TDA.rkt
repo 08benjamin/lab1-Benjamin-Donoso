@@ -82,7 +82,7 @@
 
 ;encapzulamiento 
 (define pull(lambda(info)
-                ((add info)zonas)))
+                ((pul info)zonas)))
 
 ;entrada la informacion a cambiar y zonas
 ;salida lista de las zonas de trabajo con el pull añadido
@@ -95,8 +95,8 @@
 )
 
 
-(define pull(lambda(info)
-                ((add info)zonas)))
+(define push(lambda(info)
+                ((pus info)zonas)))
 
 ;funcion la cual se encarga de mantener los cambios de las zonas de trabajo
 ;(define cambio(funcion zonas cambio)
@@ -133,9 +133,28 @@
   (if (eqv? comando add)
       #t
       #f))
+;tda verificador
+;funcion la cual verifica si las zonas introducidas cumplen con las sintaxis pre-establecida
+;entrada una zona la cual esta representada por listas de listas
+;salida booleano para poder comprobar si cumple con la estructura establecida
+(define (verificar-zonas lista)
+  ;primero verifica si se le entraga un elemento nulo
+  (if (not(null? (car lista)))
+      ;como se esta trabajando con listas se pregunta por si es un lista
+      (if (list? lista)
+          (if (string? (car lista))
+              (verificar-zonas (cdr lista))
+              #f
+          )
+      #f
+      )
+  lista    
+  )
+)
 
+(define l1 '(1 2 3 4))
 ;se hace uso de la funcion provide para utilizar los tdas en el main
-
+(provide verificar-zonas)
 (provide compAdd)
 (provide compPush)
 (provide compPull)

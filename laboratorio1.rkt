@@ -8,7 +8,7 @@
 ;entrada un string con el comando a ejecutar
 ;salida un booleano verificando la accion
 ;funcion identificadora de comandos git
-(define gitProceso (lambda(comando info) (lambda (zonasDeTrabajo)
+(define git(lambda(comando info) (lambda (zonasDeTrabajo)
     (if(procedure? comando)
        (if (compPull comando)
            #t
@@ -28,9 +28,6 @@
                                          )
                   )
 )
-(define git(lambda(comando info)
-             ((gitProceso comando info)zonas)))
-;funcion la cual operara como main para poder guardar los cambios de informacion en la lista de estados
 
 (define mantener #t)
 ;(define salir (define mantener #f))
