@@ -1,16 +1,6 @@
 #lang racket
 ;definiciones de tda para la estructuracion del programa
 
-;tda que representa la creacion de un archivo
-;entrada un string que espacifica el nombre del archivo
-;salida una lista con el nombre y contenido
-(define (archivo contenido nombre)
-  (if (and ((string? nombre) (string? contenido)))
-      (list nombre contenido)
-  #f
-  ) 
-)
-
 ;entrada nula
 ;salidas una lista de listas vacias 
 ;tda contructor
@@ -26,10 +16,6 @@
 ;  )
 ;)
 
-
-;(define zonas (commit info))
-;(define zonas1(commit(info)))
-
 ;se generan las zonas de trabajo para poder almacenar commits, estados, etc.
 (define workplace (list ))
 (define index (list ))
@@ -38,65 +24,84 @@
 ;las zonas contendran todos los espacios de trabajo para su manipulacion
 (define zonas (list workplace index local_repository remote_repository))
 
+
+
+;tda que representa la creacion de un archivo
+;entrada un string que espacifica el nombre del archivo
+;salida una lista con el nombre y contenido
+(define (verificar-archivo contenido nombre)
+  ;verifica si se le ingraso un archivo permitido o no
+  (if (and ((string? nombre) (string? contenido)))
+      (list nombre contenido)
+  #f
+  )
+)
+
+
+
+;(define (crear-archivos nombre contenido)
+ ;;  [(list? (verificar-archivo contenido nombre)) 
+      
+ 
+
+;(define zonas (list workplace index local_repository remote_repository))
 ;entrada la informacion a cambiar y zonas
 ;salida lista de las zonas de trabajo con el commit añadido
 ;funcion commit 
-(define commi(lambda(info)(lambda(zonas)
-                              (define local_repository index)
-                              (define index (list ))
+(define commit(lambda(info)(lambda(zonas)
+                              (define local_repository info)
                               (define zonas (list workplace index local_repository remote_repository))
                              zonas)
              )
 )
 
 
-;encapzulamiento               
-(define commit(lambda(info)
-                ((commi info)zonas)))
-;(define local_repository commit) 
+;tda modicador de zonas
+;entrada lista la posicion a modificar y la info por la cual se modifica la lista
+;salida lista modificada nueva zona
+(define (modificar-lista lista posicion info)
+  (if (null? lista)
+    lista
+    (cons
+     (if (zero? posicion)
+         info
+         (car lista))
+     (modificar-lista (cdr lista) (- posicion 1) info))))
 
 ;entrada la informacion a cambiar y zonas
 ;salida lista de las zonas de trabajo con el add añadido
 ;funcion add
-(define ad(lambda(info)(lambda(zonas)
-                         (define index workplace)
-                         (define workplace (list ))
-                         (define zonas (list workplace index local_repository remote_repository))
-                         zonas)
-             )
+(define add(lambda(info)(lambda(zona)
+                         (if (list? verificar-zonas)
+                             (if (not(null? (cadr zona)))
+                                 (if (string? (cadr zona))
+                                     
+                                 
 )
-;encapzulamiento   
-(define add(lambda(info)
-                ((add info)zonas)))
 
 ;entrada la informacion a cambiar y zonas
 ;salida lista de las zonas de trabajo con el pull añadido
 ;funcion pull
-(define pul(lambda(info)(lambda(zonas)
-                         (define remote_repository local_repository)
+(define pull(lambda(info)(lambda(zonas)
+                         (define remote_repository info)
                          (define local_repository (list ))
                          (define zonas (list workplace index local_repository remote_repository))
                          zonas)
              )
 )
 
-;encapzulamiento 
-(define pull(lambda(info)
-                ((pul info)zonas)))
 
 ;entrada la informacion a cambiar y zonas
 ;salida lista de las zonas de trabajo con el pull añadido
 ;funcion pull
-(define pus(lambda(info)(lambda(zonas)
-                         (define workplace remote_repository)
+(define push(lambda(info)(lambda(zonas)
+                         (define workplace info)
                          (define zonas (list workplace index local_repository remote_repository))
                          zonas)
              )
 )
 
 
-(define push(lambda(info)
-                ((pus info)zonas)))
 
 ;funcion la cual se encarga de mantener los cambios de las zonas de trabajo
 ;(define cambio(funcion zonas cambio)
@@ -142,9 +147,12 @@
   (if (not(null? (car lista)))
       ;como se esta trabajando con listas se pregunta por si es un lista
       (if (list? lista)
-          (if (string? (car lista))
+          (if (not(string? (car lista)))
+              (if (list? (car lista))
+                  (verificar-zonas (cdr lista))
+                  #f
+              )
               (verificar-zonas (cdr lista))
-              #f
           )
       #f
       )
@@ -169,4 +177,4 @@
 (provide workplace)
 (provide local_repository)
 (provide remote_repository)
-(provide archivo)
+(provide verificar-archivo)

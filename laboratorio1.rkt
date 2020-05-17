@@ -15,7 +15,7 @@
              (if (compAdd comando)
                   #t
                   (if (compCommit comando)
-                      (commit info)
+                      ((commit info)zonasDeTrabajo)
                           (if (compPush comando)
                           #t
                           #f
@@ -29,13 +29,7 @@
                   )
 )
 
-(define mantener #t)
-;(define salir (define mantener #f))
-
-(define (main listaEstados)
-  (if (equal? mantener #t)
-      (main listaEstados)
-      (display "cerrando interfaz git")))
+(define z1 '('("xd" "sup") '() '() '()))
 
   
     
