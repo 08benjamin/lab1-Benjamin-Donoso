@@ -13,7 +13,7 @@
        (if (compPull comando)
            #t
              (if (compAdd comando)
-                  #t
+                  ((add info)zonasDeTrabajo)
                   (if (compCommit comando)
                       ((commit info)zonasDeTrabajo)
                           (if (compPush comando)
@@ -25,11 +25,11 @@
        )
     #f
     )
-                                         )
-                  )
+                                 )
+            )
 )
 
-(define z1 '('("xd" "sup") '() '() '()))
+(define z1 '("xdsup" '() "dasdad" '()))  
 
   
     

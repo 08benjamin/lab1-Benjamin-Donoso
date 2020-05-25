@@ -17,6 +17,7 @@
 ;)
 
 ;se generan las zonas de trabajo para poder almacenar commits, estados, etc.
+;para la realizacion de este laboratorio las lista zonas estara compuesta de de listas vacias las cuales seran remplazadas por string para simular el funcionamiento de git
 (define workplace (list ))
 (define index (list ))
 (define local_repository (list ))
@@ -39,20 +40,33 @@
 
 
 
-;(define (crear-archivos nombre contenido)
- ;;  [(list? (verificar-archivo contenido nombre)) 
-      
- 
+;creacion de funcion la cual puede obtener un elemento de una lista de elementos segun la posicion dada
+;entrada una lista de elementos y un entero que simboliza la posicion
+;salida un elemento lista o string
+(define (buscar lista posicion)
+  
+      (if  (= 0  posicion)
+          (car lista)
+          (buscar (cdr lista) (- posicion 1))
+      )
+  
+)
 
 ;(define zonas (list workplace index local_repository remote_repository))
 ;entrada la informacion a cambiar y zonas
 ;salida lista de las zonas de trabajo con el commit añadido
 ;funcion commit 
-(define commit(lambda(info)(lambda(zonas)
-                              (define local_repository info)
-                              (define zonas (list workplace index local_repository remote_repository))
-                             zonas)
-             )
+(define commit(lambda(info)(lambda(zona)
+                              (if (not(list? (buscar zona 1)))
+                                 (if (string? (buscar zona 1))
+                                     (modificar-lista zona 2 (buscar zona 1))
+                                     (display "no posee informacion en el index")
+                                 )
+                             (display "no posee informacion en el index")
+                             )
+                        
+                         )
+           )
 )
 
 
@@ -63,7 +77,7 @@
   (if (null? lista)
     lista
     (cons
-     (if (zero? posicion)
+     (if (= 0 posicion)
          info
          (car lista))
      (modificar-lista (cdr lista) (- posicion 1) info))))
@@ -72,33 +86,52 @@
 ;salida lista de las zonas de trabajo con el add añadido
 ;funcion add
 (define add(lambda(info)(lambda(zona)
-                         (if (list? verificar-zonas)
-                             (if (not(null? (cadr zona)))
-                                 (if (string? (cadr zona))
+                             (if (not(list? (buscar zona 0)))
+                                 (if (string? (buscar zona 0))
+                                     (modificar-lista zona 1 (buscar zona 0))
+                                     (display "no posee informacion en el workplace")
+                                 )
+                             (display "no posee informacion en el workplace")
+                             )
+                        
+                         )
+           )
+)
                                      
-                                 
-)
-
-;entrada la informacion a cambiar y zonas
-;salida lista de las zonas de trabajo con el pull añadido
-;funcion pull
-(define pull(lambda(info)(lambda(zonas)
-                         (define remote_repository info)
-                         (define local_repository (list ))
-                         (define zonas (list workplace index local_repository remote_repository))
-                         zonas)
-             )
-)
+(define z1 '("xdsup" '() "dasdad" '()))                              
 
 
 ;entrada la informacion a cambiar y zonas
 ;salida lista de las zonas de trabajo con el pull añadido
 ;funcion pull
-(define push(lambda(info)(lambda(zonas)
-                         (define workplace info)
-                         (define zonas (list workplace index local_repository remote_repository))
-                         zonas)
-             )
+(define pull(lambda(info)(lambda(zona)
+                             (if (not(list? (buscar zona 3)))
+                                 (if (string? (buscar zona 3))
+                                     (modificar-lista zona 0 (buscar zona 3))
+                                     (display "no posee informacion en el remote repository")
+                                 )
+                             (display "no posee informacion en el remote repository")
+                             )
+                        
+                         )
+           )
+)
+
+
+;entrada la informacion a cambiar y zonas
+;salida lista de las zonas de trabajo con el pull añadido
+;funcion pull
+(define push(lambda(info)(lambda(zona)
+                         (if (not(list? (buscar zona 2)))
+                                 (if (string? (buscar zona 2))
+                                     (modificar-lista zona 3 (buscar zona 2))
+                                     (display "no posee informacion en el remote repository")
+                                 )
+                             (display "no posee informacion en el remote repository")
+                             )
+                        
+                         )
+           )
 )
 
 
@@ -144,15 +177,15 @@
 ;salida booleano para poder comprobar si cumple con la estructura establecida
 (define (verificar-zonas lista)
   ;primero verifica si se le entraga un elemento nulo
-  (if (not(null? (car lista)))
+  (if (not(null? lista))
       ;como se esta trabajando con listas se pregunta por si es un lista
       (if (list? lista)
           (if (not(string? (car lista)))
               (if (list? (car lista))
-                  (verificar-zonas (cdr lista))
+                  (cons (car lista) (verificar-zonas (cdr lista)))
                   #f
               )
-              (verificar-zonas (cdr lista))
+              (cons (car lista) (verificar-zonas (cdr lista)))
           )
       #f
       )
