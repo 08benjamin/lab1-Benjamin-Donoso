@@ -29,11 +29,14 @@
             )
 )
 
-(define z1 '("xdsup" '() "dasdad" '()))  
+(define z1 '("xdsup" '() "dasdad" '()))
+(define z2 '("xd" '() "dasdad" '())) 
 
   
     
-      
+
+
+  
   
 
 

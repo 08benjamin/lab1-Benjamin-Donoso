@@ -26,6 +26,18 @@
 (define zonas (list workplace index local_repository remote_repository))
 
 
+;funcion vericadora la cual se encarga en identificar similitudes en las zonas de trabajo para poder agregar cambios en estas
+;entrada zonas lista de string
+;salida booleano t o f comprobando si existen similitudes en los strings 
+(define (comparacion-informacion zonas texto posicion)
+  (if (string? texto)
+      (if (list? (regexp-match texto (buscar zonas posicion)))
+          #t
+          #f
+      )
+  #f
+  )
+)
 
 ;tda que representa la creacion de un archivo
 ;entrada un string que espacifica el nombre del archivo
@@ -57,16 +69,18 @@
 ;salida lista de las zonas de trabajo con el commit añadido
 ;funcion commit 
 (define commit(lambda(info)(lambda(zona)
-                              (if (not(list? (buscar zona 1)))
-                                 (if (string? (buscar zona 1))
-                                     (modificar-lista zona 2 (buscar zona 1))
-                                     (display "no posee informacion en el index")
+                             (if (comparacion-informacion zonas info 2)
+                                 (if (not(list? (buscar zona 1)))
+                                     (if (string? (buscar zona 1))
+                                         (modificar-lista zona 2 (buscar zona 1))
+                                         (display "no posee informacion en el index")
+                                     )
+                                 (display "no posee informacion en el index")
                                  )
-                             (display "no posee informacion en el index")
+                             zona
                              )
-                        
-                         )
-           )
+                           )
+             )
 )
 
 
@@ -86,15 +100,17 @@
 ;salida lista de las zonas de trabajo con el add añadido
 ;funcion add
 (define add(lambda(info)(lambda(zona)
-                             (if (not(list? (buscar zona 0)))
-                                 (if (string? (buscar zona 0))
-                                     (modificar-lista zona 1 (buscar zona 0))
-                                     (display "no posee informacion en el workplace")
-                                 )
-                             (display "no posee informacion en el workplace")
-                             )
-                        
-                         )
+                          (if (comparacion-informacion zonas info 1)
+                              (if (not(list? (buscar zona 0)))
+                                  (if (string? (buscar zona 0))
+                                      (modificar-lista zona 1 (buscar zona 0))
+                                      (display "no posee informacion en el workplace")
+                                  )
+                                  (display "no posee informacion en el workplace")
+                              )
+                          zona    
+                          )
+                        )
            )
 )
                                      
@@ -122,16 +138,19 @@
 ;salida lista de las zonas de trabajo con el pull añadido
 ;funcion pull
 (define push(lambda(info)(lambda(zona)
-                         (if (not(list? (buscar zona 2)))
-                                 (if (string? (buscar zona 2))
-                                     (modificar-lista zona 3 (buscar zona 2))
-                                     (display "no posee informacion en el remote repository")
-                                 )
-                             (display "no posee informacion en el remote repository")
-                             )
-                        
+                           (if (comparacion-informacion zonas info 3)
+                               (if (not(list? (buscar zona 2)))
+                                   (if (string? (buscar zona 2))
+                                       (modificar-lista zona 3 (buscar zona 2))
+                                       (display "no posee informacion en el remote repository")
+                                   )
+                                   (display "no posee informacion en el remote repository")
+                               )
+                               zona
+                           )
                          )
-           )
+              
+            )
 )
 
 
@@ -211,3 +230,4 @@
 (provide local_repository)
 (provide remote_repository)
 (provide verificar-archivo)
+(provide buscar)
