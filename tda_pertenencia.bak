@@ -1,0 +1,28 @@
+#lang racket
+(require "TDA.rkt")
+
+
+;funcion la cual identifica si el elemento de la lista es nulo segun su posicion
+;entrada lista y poscion entero
+;salida booleano verificacion
+(define (nulo lista posicion)
+  (if (= 0 posicion)
+      (if (list? (car lista))
+          (if (= (largo-lista (car lista)) 2)
+          
+              (if (not(null? (car lista)))
+                  (if (null? (cadr (car lista)))
+                      #t
+                      #f
+                  )
+                  #f
+              )
+              #f
+          )
+          #f
+      )
+      (nulo (cdr lista) (- posicion 1))
+  )
+)
+
+(provide nulo)

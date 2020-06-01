@@ -1,0 +1,32 @@
+#lang racket
+
+
+
+;entrada una funcion
+;salida un booleano confirmando si es la funcion
+;identificadores de comandos git
+(define (compCommit comando)
+  (if (eqv? comando commit)
+      #t
+      #f))
+;entrada una funcion
+;salida un booleano confirmando si es la funcion
+;identificadores de comandos git
+(define (compPush comando)
+  (if (eqv? comando push)
+      #t
+      #f))
+;entrada una funcion
+;salida un booleano confirmando si es la funcion
+;tda de pertenencia de comandos git
+(define (compPull comando)
+  (if (eqv? comando pull)
+      #t
+      #f))
+;entrada una funcion
+;salida un booleano confirmando si es la funcion
+;identificadores de comandos git
+(define (compAdd comando)
+  (if (eqv? comando add)
+      #t
+      #f))
