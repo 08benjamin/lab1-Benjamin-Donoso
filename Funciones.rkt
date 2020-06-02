@@ -4,7 +4,7 @@
 
 
 
-
+;recursion natural
 ;funcion la cual comprueba si los elementos dentro de una lista son strings
 ;entrada una lista de elementos entero string etc
 ;salida un booleano verificador
@@ -23,6 +23,7 @@
   )
 )
 
+;recursion de colar
 ;funcion verificadora la cual entrega el largo de una listas
 ;entrada lista
 ;salida un entero num que indica el largo de la lista
@@ -38,6 +39,7 @@
   (len-lista lista 0)
 )
 
+;recursion de cola
 ;creacion de funcion la cual puede obtener un elemento de una lista de elementos segun la posicion dada
 ;entrada una lista de elementos y un entero que simboliza la posicion
 ;salida un elemento lista o string

@@ -1,5 +1,6 @@
 #lang racket
 
+;recursion natural
 ;funcion la cual convierte los strings perteneciente a zonas a un formato presentable
 ;se dividen por zonas
 ;entrada una zona con strings
@@ -21,6 +22,7 @@
   (mostrar zonas "")
 )
 
+;recursion natural
 ;funcion la cual vacia una posicion de una lista
 ;entrada una lista
 ;salida una lista con un elemento nulo
@@ -40,6 +42,7 @@
   )
 )
 
+;recursion natural
 ;tda modicador de zonas
 ;entrada lista la posicion a modificar y la info por la cual se modifica la lista
 ;salida lista modificada nueva zona

@@ -39,6 +39,7 @@
 ;salida lista de las zonas de trabajo con el pull añadido
 ;funcion pull
 (define push(lambda(zona)
+              ;se pregunta si la zona es nula para evitar fallos
               (if (and (not(nulo zona 2)) (not (null? (buscar zona 2))))
                   ;se modifica la posicion 3 "remote" con modificar lista y se procede a extraer la la info "string" de la zona local y se hace lista de string separando con parentesis para poder usar la funcion comparar listas
                   (modificar-lista zona 3 (comparar-listas zona (string-split (buscar zona 2) " ") 3))
@@ -53,6 +54,7 @@
 ;salida lista de las zonas de trabajo con el pull añadido
 ;funcion pull
 (define pull(lambda(zona)
+              ;se pregunta  si la zona es nula para evitar fallos
              (if (and (not(nulo zona 3)) (not (null? (buscar zona 3))))
                  ;se modifica la posicion 0 workplace con modificar lista y se procede a extraer la la info "string" de la zona remote y se hace lista de string separando con parentesis para poder usar la funcion comparar listas
                  (modificar-lista zona 0 (comparar-listas zona (string-split (buscar zona 3) " ") 0))
@@ -67,7 +69,7 @@
 ;salida lista de las zonas de trabajo con el add añadido
 ;funcion add
 (define add(lambda(info)(lambda(zona)
-                          ;se usa la funcion lista-con-string para verificar si la lista que se entrego posee strings
+                          ;se usa la funcion lista-con-string para verificar si la lista que se entrego posee strings y si la zona es nula
                           (if (and (not(null? (lista-con-string info))) (not (null? (buscar zona 0))))
                               ;si es asi se procede a modificar la lista segun los elementos dados que no se repitan
                                       (modificar-lista zona 1 (comparar-listas zona (string-split (comparar-lista-esta zona info 0) " ") 1))
@@ -86,7 +88,7 @@
 ;salida lista de las zonas de trabajo con el commit añadido
 ;funcion commit 
 (define commit(lambda(info)(lambda(zona)
-                             ;primero se pregunta si el commit entregado es un string
+                             ;primero se pregunta si el commit entregado es un string y si la zona es nula
                              (if (and (and (string? info)  (not(nulo zona 1))) (not (null? (buscar zona 1))))
                                  ;si es se procede a modificar la posicon 2 de la lista "add" usando la funcion eliminar para vaciar el index y se compara la informacion que posee index y local repository
                                  ;para añadir solamente los archivos nuevos a local
@@ -147,32 +149,36 @@
 ;commit
 ;entregara la lista modificada
 ;(((git commit)"mi comentario")zonas)
-;se procede a guardar la modificacion de zonas
+;para poder guardar los cambios que ejecutan las funciones debe darles una variable debido a que no se puede usar cambios de estado
 ;(define zona2 (((git commit)"actualizando codigo")zona)
 ;(define zona3 (((git commit)"ultimo actualizacion del programa")zona2)
 
 ;pull
 ;entregara la lista modificada
+;necesita un string y las zonas para funcionar zonas (workplace index locar remote)
 ;(((git pull)"origin master")zonas)
-;se procede a guardar la modificacion de zonas
+;para poder guardar los cambios que ejecutan las funciones debe darles una variable debido a que no se puede usar cambios de estado
 ;(define zona2 (((git pull)"origin master")zona)
 ;(define zona3 (((git pull)"origin master")zona2)
 
 ;push
 ;entregara la lista modificada
+;necesita un string y las zonas para funcionar zonas (workplace index locar remote)
 ;(((git push)"origin master")zonas)
-;se procede a guardar la modificacion de zonas
+;para poder guardar los cambios que ejecutan las funciones debe darles una variable debido a que no se puede usar cambios de estado
 ;(define zona2 (((git push)"origin master")zona)
 ;(define zona3 (((git push)"origin master")zona2)
 
 ;add
 ;entregara la lista modificada
-;(((git push)"origin master")zonas)
-;se procede a guardar la modificacion de zonas
-;(define zona2 (((git push)"origin master")zona)
-;(define zona3 (((git push)"origin master")zona2)
+;necesita una lista de string '("archivo1.rkt" "archivo2.rkt") y las zonas para funcionar zonas (workplace index locar remote)
+;(((git add)'("archivo1.rkt" "archivo2.rkt"))zonas)
+;para poder guardar los cambios que ejecutan las funciones debe darles una variable debido a que no se puede usar cambios de estado
+;(define zona2 (((git add)'("archivo2.rkt"))zona)
+;(define zona3 (((git add)null)zona2)
 
 ;zonas->string
+;esta funcion simplemente muestra el contenido de las zonas de trabajo se le tiene que proveer estas
 ;(zonas->string zonas)
 ;(zonas->string zona100)
 ;(zonas->string zona150)

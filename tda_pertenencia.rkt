@@ -64,6 +64,7 @@
 )
 
 ;tda verificador
+;recursion natural
 ;funcion la cual verifica si las zonas introducidas cumplen con las sintaxis pre-establecida
 ;entrada una zona la cual esta representada por listas de listas
 ;salida booleano para poder comprobar si cumple con la estructura establecida

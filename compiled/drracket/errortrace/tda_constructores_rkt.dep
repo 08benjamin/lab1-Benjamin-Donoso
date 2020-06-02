@@ -1,1 +1,1 @@
-("7.6" racket ("f22f7042bbedd4c3baa429f1030cb3f5cdcb15c7" . "fba3f13847527e1a54ccb89608c814cbc1c1b4c9") #"D:\\lab1\\lab1-Benjamin-Donoso\\tda_pertenencia.rkt" (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))
+("7.6" racket ("a5c4b84481adc66761a290a2acc4e0a666b2795e" . "52a7c381d25c3c58ab3fed423927269979a7598f") #"D:\\lab1\\lab1-Benjamin-Donoso\\tda_pertenencia.rkt" (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

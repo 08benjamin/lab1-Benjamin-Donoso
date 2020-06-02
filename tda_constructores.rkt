@@ -11,7 +11,7 @@
   )
 )
 
-
+;recursion de cola
 ;funcion la cual compara string por string de una lista
 ;entrada lista con strings
 ;salida lista con elementos no repetidos
@@ -38,6 +38,7 @@
   )
 )
 
+;recursion de cola
 ;funcion opuesta a su contraparte esta funcion se encarga de ver su un elemento coincide
 ;entrada lista entero string
 ;salida string que coinciden
@@ -63,6 +64,7 @@
       )
   )
 )
+;se encapzula la funcion para definir el la composicion de strings como un string vacio de forma que si no posee ningun string nuevo se añade un "" el cual no afecta a strings normales
 (define (comparar-lista-esta zonas lista posicion)
   (comparar-list-esta zonas lista posicion "")
 )
