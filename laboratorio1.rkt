@@ -139,5 +139,41 @@
       #t
       #f))
 
-       
-(define l1 (list "archivo1 contenido1 archivo2 contenido2" remote_repository "archivo1" remote_repository))
+(define zona (list workplace "archivo2 contenido2" "archivo1" "archivo1 archivo2"))
+
+;;---------------------------------------------------------------
+;ejemplos de uso
+;por favor ingresar de esta forma las funciones en la consola
+;commit
+;entregara la lista modificada
+;(((git commit)"mi comentario")zonas)
+;se procede a guardar la modificacion de zonas
+;(define zona2 (((git commit)"actualizando codigo")zona)
+;(define zona3 (((git commit)"ultimo actualizacion del programa")zona2)
+
+;pull
+;entregara la lista modificada
+;(((git pull)"origin master")zonas)
+;se procede a guardar la modificacion de zonas
+;(define zona2 (((git pull)"origin master")zona)
+;(define zona3 (((git pull)"origin master")zona2)
+
+;push
+;entregara la lista modificada
+;(((git push)"origin master")zonas)
+;se procede a guardar la modificacion de zonas
+;(define zona2 (((git push)"origin master")zona)
+;(define zona3 (((git push)"origin master")zona2)
+
+;add
+;entregara la lista modificada
+;(((git push)"origin master")zonas)
+;se procede a guardar la modificacion de zonas
+;(define zona2 (((git push)"origin master")zona)
+;(define zona3 (((git push)"origin master")zona2)
+
+;zonas->string
+;(zonas->string zonas)
+;(zonas->string zona100)
+;(zonas->string zona150)
+
